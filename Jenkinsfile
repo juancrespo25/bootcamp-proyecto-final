@@ -14,6 +14,9 @@ node ("EC2"){
       sh '''terraform fmt
           terraform validate'''
     }
+    stage('Workspace'){
+      sh 'terraform workspace new prod'
+    }
   }
   catch(caughtError){
         err = caughtError
