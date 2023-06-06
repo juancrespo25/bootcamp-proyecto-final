@@ -8,8 +8,8 @@ node ("EC2"){
     stage('init') {
       sh 'terraform init'
     }
-    stage('Build') {
-        echo "Build Gradle App"
+    stage('Validate'){ 
+      sh '''terraform fmt
+          terraforma validate'''
     }
-    sh "ls"
 }
