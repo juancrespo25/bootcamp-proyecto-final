@@ -2,6 +2,7 @@ provider "aws" {
   region = "us-east-2"
 }
 
+/*
 terraform {
   backend "s3" {
     bucket = "cloudcamp-terraform-state-jcv"
@@ -10,4 +11,4 @@ terraform {
     dynamodb_table = "cloudcamp-ddb-lock"
     encrypt = true
   }
-}
+}*/
