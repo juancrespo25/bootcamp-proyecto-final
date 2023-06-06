@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "public_1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = cidrsubnet(var.cidr, 8, 1)
   tags = {
@@ -13,7 +13,7 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "public_2" {
   vpc_id     = aws_vpc.main.id
   cidr_block = cidrsubnet(var.cidr, 8, 2)
   tags = {
