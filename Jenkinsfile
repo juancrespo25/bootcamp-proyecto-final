@@ -10,6 +10,6 @@ node ("EC2"){
     }
     stage('Validate'){ 
       sh '''terraform fmt
-          terraforma validate'''
+          terraform validate'''
     }
 }
