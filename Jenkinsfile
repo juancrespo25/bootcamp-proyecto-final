@@ -14,12 +14,7 @@ node ("EC2"){
     stage('Workspace'){
       sh 'terraform workspace new prod'
     }
-    withCredentials([[
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "AWS_credentials",
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]){
+    {
             stage('init') {
             sh 'terraform init'
             }
