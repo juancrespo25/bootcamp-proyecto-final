@@ -23,6 +23,9 @@ node ("EC2"){
             sh '''terraform fmt
                 terraform validate'''
           }
+          stage('Plan'){
+            sh 'terraform plan --var-file=environments/prod.tfvars'
+          }
         }
   }
   catch(caughtError){
