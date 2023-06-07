@@ -24,8 +24,7 @@ node ("EC2"){
             sh 'terraform plan --var-file=environments/prod.tfvars'
           }
           stage('Apply'){
-            sh '''terraform apply --var-file=environments/prod.tfvars --auto-approve=true
-                terraform force-unlock'''
+            sh 'terraform apply --var-file=environments/prod.tfvars --auto-approve=true -lock=false'
           }
         }
   }
