@@ -7,9 +7,6 @@ node ("EC2"){
     stage('checkout'){
       checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-credentials', url: 'https://github.com/juancrespo25/bootcamp-proyecto-final.git']])
     }
-    stage('init') {
-      sh 'terraform init'
-    }
     stage('Validate'){ 
       sh '''terraform fmt
           terraform validate'''
@@ -17,6 +14,16 @@ node ("EC2"){
     stage('Workspace'){
       sh 'terraform workspace new prod'
     }
+    withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: "AWS_credentials",
+            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]){
+            stage('init') {
+            sh 'terraform init'
+            }
+        }
   }
   catch(caughtError){
         err = caughtError
