@@ -9,7 +9,7 @@ node ("EC2"){
     }
     withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "MY_AWS_CREDENTIALS",
+            credentialsId: "aws-credentials",
             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]){
