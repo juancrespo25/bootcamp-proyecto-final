@@ -14,15 +14,6 @@ node ("EC2"){
       sh '''terraform fmt
           terraform validate'''
     }
-    stage('Workspace'){
-      sh 'terraform workspace new prod'
-    }
-    withCredentials([[
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "MY_AWS_CREDENTIALS",
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]])
   }
   catch(caughtError){
         err = caughtError
