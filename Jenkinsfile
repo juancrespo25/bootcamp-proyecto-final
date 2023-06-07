@@ -25,7 +25,7 @@ node ("EC2"){
           }
           if (params.destroy){
               stage ('Destroy'){
-                sh "terraform destroy --var-file=environments/prod.tfvars -auto-approve -lock=false"
+                sh "terraform destroy --var-file=environments/prod.tfvars --auto-approve -lock=false"
               }
           }
           else {
