@@ -23,6 +23,9 @@ node ("EC2"){
           stage('Plan'){
             sh 'terraform plan --var-file=environments/prod.tfvars'
           }
+          stage('Apply'){
+            sh 'terraform apply --var-file=environments/prod.tfvars'
+          }
         }
   }
   catch(caughtError){
