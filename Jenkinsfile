@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-
+properties([parameters([booleanParam(defaultValue: false, name: 'destroy')]), pipelineTriggers([GenericTrigger(causeString: 'Generic Cause', regexpFilterExpression: '', regexpFilterText: '', token: 'terraform-pipeline', tokenCredentialId: '')])])
 node ("EC2"){
   def err = null
   try{
@@ -23,8 +23,15 @@ node ("EC2"){
           stage('Plan'){
             sh 'terraform plan --var-file=environments/prod.tfvars'
           }
-          stage('Apply'){
-            sh 'terraform apply --var-file=environments/prod.tfvars --auto-approve=true -lock=false'
+          if (params.destroy){
+              stage ('Destroy'){
+                sh "terraform destroy --var-file=environments/prod.tfvars -auto-approve -lock=false"
+              }
+          }
+          else {
+              stage('Apply'){
+                sh 'terraform apply --var-file=environments/prod.tfvars --auto-approve=true -lock=false'
+              }
           }
         }
   }
