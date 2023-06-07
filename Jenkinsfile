@@ -16,9 +16,6 @@ node ("EC2"){
           stage('init') {
             sh 'terraform init'
           }
-          stage('Workspace'){
-            sh 'terraform workspace new prod'
-          }
           stage('Validate'){ 
             sh '''terraform fmt
                 terraform validate'''
